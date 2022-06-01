@@ -16,7 +16,7 @@
   "module": "./dist/pagetransitions.module.js",
   "unpkg": "./dist/pagetransitions.umd.js",
   "scripts": {
-    "build": "microbundle --globals zustand/vanilla=zustand/vanilla",
+    "build": "microbundle --globals zustand/vanilla=zustand/vanilla,react/jsx-runtime=jsx --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react",
     "dev": "microbundle watch"
   },
   "devDependencies": {
