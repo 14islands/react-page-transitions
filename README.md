@@ -14,7 +14,7 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 <br/>
 
 <p align="center">
- <a href="https://codesandbox.io/s/react-xr-paddle-demo-v4uet"><img width="390" src="https://user-images.githubusercontent.com/420472/171502949-43c2ebe7-12ce-47d7-b5d3-2b3a912c9af4.gif" alt="Demo"/></a>
+ <a href="https://fjf81s.csb.app/"><img width="400" src="https://user-images.githubusercontent.com/420472/171502949-43c2ebe7-12ce-47d7-b5d3-2b3a912c9af4.gif" alt="Demo"/></a>
 
 </p>
 <p align="middle">
@@ -87,15 +87,15 @@ return (
 
 ```jsx
 function MyComponent() {
-  const { transitionState, from, to } = usePageTransition()
+  const { transitionState, from, to } = usePageTransition();
 
   const styles = useSpring({
     from: {
-      x: transitionState === "entering" ? "-100%" : "0%"
-    }
-  })
+      x: transitionState === "entering" ? "-100%" : "0%",
+    },
+  });
 
-  return <animated.div style={styles} />
+  return <animated.div style={styles} />;
 }
 ```
 
@@ -168,7 +168,7 @@ The `suspended` state only happens if the entering page (Page B) suspended while
 
 Wrap your routes with this component so it can manage the lifecycle of mounting and unmounting pages.
 
-By default it uses the "out-in" strategy, which means the current page animates out and is removed from the DOM as the new page in mounted and animates in.
+By default it uses the "out-in" strategy, which means the current page animates out and is removed from the DOM before the new page is mounted and animates in.
 
 It listens to CSS `transitionend` and CSS `animationend` events on the page container by default to trigger the lifecycle. This can be turned off either globally using the properties, or overridden per page via the `onExiting` and `onEntering` callbacks on the `usePageTransitions` hook.
 
@@ -207,12 +207,12 @@ return (
 ```jsx
 // _app.js
 function MyApp({ Component, pageProps, router }) {
-  console.log('router.pathname', router.pathname)
+  console.log("router.pathname", router.pathname);
   return (
     <PageTransitions pageName={router.pathname}>
       <Component {...pageProps} />
     </PageTransitions>
-  )
+  );
 }
 ```
 
@@ -224,8 +224,10 @@ function MyApp({ Component, pageProps, router }) {
 ```jsx
 // gatsby-browser.js
 export const wrapPageElement = ({ element, props: { location } }) => {
-  return <PageTransitions pageName={location.pathname}>{element}</PageTransitions>
-}
+  return (
+    <PageTransitions pageName={location.pathname}>{element}</PageTransitions>
+  );
+};
 ```
 
 </details>
@@ -250,24 +252,31 @@ function MyPage() {
 
 ### Return values
 
-| transitionState | description                            |
-| --------------- | -------------------------------------- |
-| enter           | Page was mounted and is about to enter |
-| entering        | Page is currently animating in         |
-| entered         | Page has finished animating            |
-| exit            | When page is about to animate out      |
-| entering        | Page is currently animating out        |
-| exited          | Page has finished animating out        |
+| transitionState | description                                 |
+| --------------- | ------------------------------------------- |
+| suspended       | Page is waiting to mount                    |
+| appear          | Page is about to animate in on page load    |
+| appearing       | Page is currently animating in on page load |
+| appeared        | Page has finished animating in on page load |
+| exit            | When page is about to animate out           |
+| entering        | Page is currently animating out             |
+| exited          | Page has finished animating out             |
+| enter           | Page was mounted and is about to enter      |
+| entering        | Page is currently animating in              |
+| entered         | Page has finished animating in              |
 
 ### Callbacks
 
-| callbacks  | callback params    |  description                                                                                               |
-| ---------- | ------------------ | ---------------------------------------------------------------------------------------------------------- |
-| onExit     | { from, to }       | Page is about to exit                                                                                      |
-| onExiting  | { from, to, done } | Page is currently animating iout - the `done` function has to be called to indicated animation is complete |
-| onEnter    | { from, to }       | Page was mounted and is about to enter                                                                     |
-| onEntering | { from, to, done } | Page is currently animating in - the `done` function has to be called to indicated animation is complete   |
-| onEntered  | { from, to }       | tbd                                                                                                        |
+| callbacks   | callback params    |  description                                                                                              |
+| ----------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
+| onAppear    | { from, to }       | Page was mounted and is about to enter on page load                                                       |
+| onAppearing | { from, to, done } | Page is currently animating in - the `done` function has to be called to indicated animation is complete  |
+| onAppeared  | { from, to }       | Page finished animating in after page load                                                                |
+| onExit      | { from, to }       | Page is about to exit due to page navigation                                                              |
+| onExiting   | { from, to, done } | Page is currently animating out - the `done` function has to be called to indicated animation is complete |
+| onEnter     | { from, to }       | Page was mounted and is about to enter                                                                    |
+| onEntering  | { from, to, done } | Page is currently animating in - the `done` function has to be called to indicated animation is complete  |
+| onEntered   | { from, to }       | Page finished animating in after page navigation                                                          |
 
 <br/>
 
@@ -341,22 +350,22 @@ This depends on your framework router. ReactRouter v6, for instance, provides a 
 This is up to the user to control. It depends on the router you are using and the timing of your transition. Here's an example using ReactRouter v6, which let's the browser reset previous scroll position on history navigation:
 
 ```jsx
-import { useLocation, useNavigationType } from 'react-router-dom'
+import { useLocation, useNavigationType } from "react-router-dom";
 
 function ScrollToTop() {
-  const location = useLocation()
-  const action = useNavigationType()
+  const location = useLocation();
+  const action = useNavigationType();
 
   useEffect(
     function scrollToTopWhenNavForward() {
-      if (action !== 'POP') {
-        window.scrollTo(0, 0)
+      if (action !== "POP") {
+        window.scrollTo(0, 0);
       }
     },
     [location, action]
-  )
+  );
 
-  return null
+  return null;
 }
 ```
 
