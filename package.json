@@ -1,6 +1,6 @@
 {
   "name": "@14islands/react-page-transitions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Framework agnostic page transitions for react",
   "repository": "git@github.com:14islands/react-page-transitions.git",
   "author": "David Lindkvist <david@14islands.com>",
