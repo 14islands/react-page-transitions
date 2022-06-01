@@ -16,14 +16,15 @@
   "module": "./dist/pagetransitions.module.js",
   "unpkg": "./dist/pagetransitions.umd.js",
   "scripts": {
-    "build": "microbundle",
+    "build": "microbundle --globals zustand/vanilla=zustand/vanilla",
     "dev": "microbundle watch"
   },
   "devDependencies": {
     "@types/react": "^18.0.10",
     "@types/react-dom": "^18.0.5",
     "@types/react-transition-group": "^4.4.4",
-    "microbundle": "^0.15.0"
+    "microbundle": "^0.15.0",
+    "zustand": "^3.0.0"
   },
   "peerDependencies": {
     "react": "^18.1.0",
