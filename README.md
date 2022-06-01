@@ -11,6 +11,17 @@ As an agency we often have to used different frameworks and it would be benefici
 Depends on `react-transition-group` for mounting/unmounting logic.
 
 <br/>
+<br/>
+
+<p align="center">
+ <a href="https://codesandbox.io/s/react-xr-paddle-demo-v4uet"><img width="390" src="https://user-images.githubusercontent.com/420472/171502949-43c2ebe7-12ce-47d7-b5d3-2b3a912c9af4.gif" alt="Demo"/></a>
+
+</p>
+<p align="middle">
+  <i>Click demo to try it out and see the code.</i>
+</p>
+
+<br/>
 
 ## Design goals & features
 
@@ -18,6 +29,7 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 - Animation lib agnostic
 - Adds CSS classnames with transition status to the page containers. CSS animations are more performant than JS, especially while the browser is loading assets.
 - Provides a hook `usePageTransition()` with transition status that can be accessed by any component in the tree
+- Relies on React.Suspense for delaying transitions if a page takes time to load
 - Supports default page transitions on history nav
 - Supports contextual transitions triggered by links - able to pass data to current and next page
 - Support barba.js sync mode - i.e. having 2 pages mounted at the same time
