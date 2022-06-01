@@ -1,4 +1,6 @@
-# @14island/react-page-transitions
+# @14islands/react-page-transitions
+
+<br/>
 
 A framework-agnostic page transition lib for react. Tested with CRA, Next.js, Gatsby.js
 
@@ -7,6 +9,8 @@ As an agency we often have to used different frameworks and it would be benefici
 > :bulb: This library doesn’t apply any styles to the page container, you need to manage it by yourself with an animation library or CSS transitions/animations.
 
 Depends on `react-transition-group` for mounting/unmounting logic.
+
+<br/>
 
 ## Design goals & features
 
@@ -19,7 +23,76 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 - Support barba.js sync mode - i.e. having 2 pages mounted at the same time
 - Doesn't touch scroll position - you need to manage it yourself depending on your framework and transition timings.
 
+<br/>
+<br/>
+
+# Getting Started
+
+<br/>
+
+## Install npm package
+
+```bash
+yarn add @14islands/react-page-transitions
+```
+
+## Wrap your router pages
+
+```jsx
+// App.js
+return (
+  <PageTransitions pageName={location.pathname}>
+    <Routes location={location}>
+      <Route path="/" element={<PageHome />} />
+      <Route path="/a" element={<PageA />} />
+      <Route path="/b" element={<PageB />} />
+    </Routes>
+  </PageTransitions>
+```
+
+## Add default transitions using CSS classes
+
+```css
+.page-appear,
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active,
+.page-appear-active {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.page-exit {
+  opacity: 1;
+}
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 1s;
+}
+```
+
+## Get transition state using hook
+
+```jsx
+function MyComponent() {
+  const { transitionState, from, to } = usePageTransition()
+
+  const styles = useSpring({
+    from: {
+      x: transitionState === "entering" ? "-100%" : "0%"
+    }
+  })
+
+  return <animated.div style={styles} />
+}
+```
+
+<br/>
+<br/>
+
 # Lifecycle
+
+<br/>
 
 ## Page Load timeline
 
@@ -72,7 +145,12 @@ sequenceDiagram
 
 The `suspended` state only happens if the entering page (Page B) suspended while mounting. It continues to the `appear` state automatically when suspense has resolved. To prevent this you can define your own `<Suspense>` further down the tree, which will cause the page to animate in and show your fallback instead.
 
+<br/>
+<br/>
+
 # API
+
+<br/>
 
 ## `<PageTransitions>`
 
@@ -108,7 +186,6 @@ return (
       <Route path="/b" element={<PageB />} />
     </Routes>
   </PageTransitions>
-</BrowserRouter>
 ```
 </details>
 
@@ -140,6 +217,8 @@ export const wrapPageElement = ({ element, props: { location } }) => {
 ```
 
 </details>
+
+<br/>
 
 ## `usePageTransition()`
 
@@ -177,6 +256,8 @@ function MyPage() {
 | onEnter    | { from, to }       | Page was mounted and is about to enter                                                                     |
 | onEntering | { from, to, done } | Page is currently animating in - the `done` function has to be called to indicated animation is complete   |
 | onEntered  | { from, to }       | tbd                                                                                                        |
+
+<br/>
 
 # setPageTransitionData
 
@@ -228,18 +309,23 @@ function ItemPage() {
 }
 ```
 
+<br/>
+<br/>
+
 # FAQ
+
+<br/>
 
 <details>
   <summary>How do I detect if user navigated using back button?</summary>
-
+<br/>
 This depends on your framework router. ReactRouter v6, for instance, provides a `useNavigationType()` hook that tells you if it was a POP, PUSH or REPLACE
 
 </details>
 
 <details>
   <summary>How do I scroll to top when navigating to a new page?</summary>
-
+<br/>
 This is up to the user to control. It depends on the router you are using and the timing of your transition. Here's an example using ReactRouter v6, which let's the browser reset previous scroll position on history navigation:
 
 ```jsx
