@@ -1,5 +1,5 @@
 {
-  "name": "react-page-transitions",
+  "name": "@14islands/react-page-transitions",
   "version": "1.0.0",
   "description": "Framework agnostic page transitions for react",
   "repository": "git@github.com:14islands/react-page-transitions.git",
@@ -20,6 +20,14 @@
     "dev": "microbundle watch"
   },
   "devDependencies": {
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5",
+    "@types/react-transition-group": "^4.4.4",
     "microbundle": "^0.15.0"
+  },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "zustand": "^3.0.0"
   }
 }
