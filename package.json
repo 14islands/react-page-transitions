@@ -1,0 +1,25 @@
+{
+  "name": "react-page-transitions",
+  "version": "1.0.0",
+  "description": "Framework agnostic page transitions for react",
+  "repository": "git@github.com:14islands/react-page-transitions.git",
+  "author": "David Lindkvist <david@14islands.com>",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "source": "src/pagetransitions.tsx",
+  "exports": {
+    "require": "./dist/pagetransitions.cjs",
+    "default": "./dist/pagetransitions.modern.js"
+  },
+  "main": "./dist/pagetransitions.cjs",
+  "module": "./dist/pagetransitions.module.js",
+  "unpkg": "./dist/pagetransitions.umd.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.0"
+  }
+}
