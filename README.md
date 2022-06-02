@@ -4,7 +4,7 @@
 
 A framework-agnostic page transition lib for react. Tested with CRA, Next.js, Gatsby.js
 
-As an agency we often have to used different frameworks and it would be beneficial to keep the same mental model and lifecycle for page transitions.
+As a creative studio we often have to adapt to our clients. It would be great if we could keep the same mental model and lifecycle for page transitions, no matter the react framework we end up using.
 
 > :bulb: This library doesn’t apply any styles to the page container, you need to manage it by yourself with an animation library or CSS transitions/animations.
 
@@ -18,21 +18,21 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 
 </p>
 <p align="middle">
-  <i>Click demo to try it out and see the code.</i>
+  <i>Check out <a href="https://fjf81s.csb.app/">the demo</a> and see the code.</i>
 </p>
 
 <br/>
 
 ## Design goals & features
 
-- Framework agnostic
-- Animation lib agnostic
+- Should work with most common React frameworks
+- Doesn't lock you in to any specific animation library
 - Adds CSS classnames with transition status to the page containers. CSS animations are more performant than JS, especially while the browser is loading assets.
 - Provides a hook `usePageTransition()` with transition status that can be accessed by any component in the tree
 - Relies on React.Suspense for delaying transitions if a page takes time to load
 - Supports default page transitions on history nav
 - Supports contextual transitions triggered by links - able to pass data to current and next page
-- Support barba.js sync mode - i.e. having 2 pages mounted at the same time
+- Support barba.js sync mode - i.e. having 2 pages mounted at the same time (overlapping)
 - Doesn't touch scroll position - you need to manage it yourself depending on your framework and transition timings.
 
 <br/>
@@ -45,7 +45,7 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 ## Install npm package
 
 ```bash
-yarn add @14islands/react-page-transitions
+yarn add @14islands/react-page-transitions zustand react-transition-group
 ```
 
 ## Wrap your router pages
@@ -179,10 +179,10 @@ If you want to take manual control of the transition duration, you can use the c
 | Property            | type                     |  default   |
 | ------------------- | ------------------------ | ---------- |
 | mode                | out-in \| in-out \| sync | "out-in"   |
-| className           |  string                  | "page"     |
-|  timeout            | number                   |  undefined |
-| detectAnimationEnd  |  boolean                 | true       |
-| detectTransitionEnd | boolean                  |  true      |
+| className           | string                   | "page"     |
+| timeout             | number                   | undefined |
+| detectAnimationEnd  | boolean                  | true       |
+| detectTransitionEnd | boolean                  | true      |
 
 <details>
   <summary>Show React Router v6 CRA example</summary>
@@ -240,12 +240,12 @@ This hook allows any component nested within `<PageTransitions>` to listen and r
 
 ```jsx
 function MyPage() {
-  const { transitionState, from, to } = usePageTransition({
+  const { transitionState, from, to, data } = usePageTransition({
       onEnter: ({ from, to }) => void,
-      onEntering: ({ from, to, done }) => void
+      onEntering: ({ from, to, done, data }) => void
       onEntered: ({ from, to }) => void,
       onExit: ({ from, to }) => void,
-      onExiting: ({ from, to, done }) => void
+      onExiting: ({ from, to, done, data }) => void
   })
 }
 ```
@@ -259,7 +259,7 @@ function MyPage() {
 | appearing       | Page is currently animating in on page load |
 | appeared        | Page has finished animating in on page load |
 | exit            | When page is about to animate out           |
-| entering        | Page is currently animating out             |
+| exiting         | Page is currently animating out             |
 | exited          | Page has finished animating out             |
 | enter           | Page was mounted and is about to enter      |
 | entering        | Page is currently animating in              |
