@@ -1,5 +1,7 @@
 # @14islands/react-page-transitions
 
+[![Version](https://img.shields.io/npm/v/@14islands/react-page-transitions?style=flat&colorA=000000&colorB=000000)](https://npmjs.com/package/@14islands/react-page-transitions)
+
 <br/>
 
 A framework-agnostic page transition lib for react. Tested with CRA, Next.js, Gatsby.js
@@ -45,7 +47,7 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 ## Install npm package
 
 ```bash
-yarn add @14islands/react-page-transitions zustand react-transition-group
+yarn add react-transition-group zustand @14islands/react-page-transitions
 ```
 
 ## Wrap your router pages
