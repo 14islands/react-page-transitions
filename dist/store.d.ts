@@ -16,6 +16,7 @@ declare type Store = {
     onEnteringCount: number;
     onExitingCount: number;
     applyTransitionConfig: () => void;
+    suspendedRoute: string | null;
 };
 declare const store: import("zustand").StoreApi<Store>;
 declare const useStore: import("zustand").UseBoundStore<Store, import("zustand").StoreApi<Store>>;

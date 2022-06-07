@@ -1,4 +1,4 @@
-import { ReactNode, useRef, Suspense } from "react";
+import { ReactNode, useRef, Suspense, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 
 import { TransitionState } from "./enums";
@@ -21,6 +21,30 @@ interface PageWrapperProps {
   onExited?: () => void;
 }
 
+const Fallback = ({
+  pathname,
+  className,
+}: {
+  pathname: string;
+  className?: string;
+}) => {
+  const isFirstAppear = !store.getState().from;
+  // keep track of suspended status
+  useEffect(() => {
+    store.setState({ suspendedRoute: pathname });
+    return () => {
+      store.setState({ suspendedRoute: null });
+    };
+  }, []);
+  return (
+    <div
+      className={`${className} ${className}-${pathToHypen(
+        pathname
+      )} ${className}-${isFirstAppear ? "appear" : "enter"}-suspended`}
+    />
+  );
+};
+
 export function PageWrapper({
   children,
   pathname,
@@ -31,20 +55,9 @@ export function PageWrapper({
   ...props
 }: PageWrapperProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isFirstAppear = !store.getState().from;
-
-  const Fallback = () => {
-    return (
-      <div
-        className={`${className} ${className}-${pathToHypen(
-          pathname
-        )} ${className}-${isFirstAppear ? "appear" : "enter"}-suspended`}
-      />
-    );
-  };
 
   return (
-    <Suspense fallback={<Fallback />}>
+    <Suspense fallback={<Fallback pathname={pathname} className={className} />}>
       <CSSTransition
         nodeRef={ref}
         key={pathname}

@@ -21,6 +21,7 @@ type Store = {
   onEnteringCount: number;
   onExitingCount: number;
   applyTransitionConfig: () => void;
+  suspendedRoute: string | null;
 };
 
 const store = create<Store>((set) => ({
@@ -39,6 +40,7 @@ const store = create<Store>((set) => ({
       data: state.transitionConfig?.data,
       transitionConfig: null,
     })),
+  suspendedRoute: null,
 }));
 
 const useStore = createHook<Store>(store);

@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect, useMemo } from "react";
+import { Fragment, ReactNode, useLayoutEffect, useMemo, useState } from "react";
 import { SwitchTransition, TransitionGroup } from "react-transition-group";
 
 import { TransitionState } from "./enums";
@@ -80,10 +80,20 @@ export function PageTransitions({
     );
   }
 
+  // Workaround: reset if user navigates while page is suspended
+  const [key, setKey] = useState(0);
+  useLayoutEffect(() => {
+    const suspendedRoute = store.getState().suspendedRoute;
+    if (!!suspendedRoute && pathname !== suspendedRoute) {
+      // Force a remout of react-transition-group
+      setKey(key + 1);
+    }
+  }, [pathname, key, setKey]);
+
   return (
-    <>
+    <Fragment key={key}>
       {mode === "sync" ? renderSyncTransition() : renderSwitchTransition(mode)}
-    </>
+    </Fragment>
   );
 }
 
