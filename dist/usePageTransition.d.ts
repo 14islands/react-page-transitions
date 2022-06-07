@@ -35,14 +35,14 @@ interface usePageTransitionProps {
     }) => void;
 }
 export declare function usePageTransition({ onAppear, onAppearing, onAppeared, onEnter, onEntering, onEntered, onExit, onExiting, }?: usePageTransitionProps): {
-    transitionStateTo: import("./store").TransitionState;
-    transitionStateFrom: import("./store").TransitionState;
+    transitionStateTo: import("./enums").TransitionState;
+    transitionStateFrom: import("./enums").TransitionState;
     from: string | null;
     to: string | null;
     data: any;
     transitionState?: undefined;
 } | {
-    transitionState: import("./store").TransitionState;
+    transitionState: import("./enums").TransitionState;
     from: string | null;
     to: string | null;
     data: any;

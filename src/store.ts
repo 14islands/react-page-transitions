@@ -1,18 +1,7 @@
 import create from "zustand/vanilla";
 import createHook from "zustand";
 
-export enum TransitionState {
-  SUSPENDED = "suspended", // waiting to mount or suspended
-  APPEAR = "appear",
-  APPEARING = "appearing",
-  APPEARED = "appeared",
-  EXIT = "exit",
-  EXITING = "exiting",
-  EXITED = "exited",
-  ENTER = "enter",
-  ENTERING = "entering",
-  ENTERED = "entered",
-}
+import { TransitionState } from "./enums";
 
 export type TransitionConfig = {
   from?: string;

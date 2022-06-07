@@ -1,8 +1,9 @@
 import { ReactNode, useRef, Suspense } from "react";
 import { CSSTransition } from "react-transition-group";
 
+import { TransitionState } from "./enums";
 import { PageContext } from "./context";
-import { store, TransitionState } from "./store";
+import { store } from "./store";
 import { pathToHypen } from "./utils";
 
 interface PageWrapperProps {

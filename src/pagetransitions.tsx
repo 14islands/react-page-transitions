@@ -1,7 +1,8 @@
 import { ReactNode, useLayoutEffect, useMemo } from "react";
 import { SwitchTransition, TransitionGroup } from "react-transition-group";
 
-import { store, TransitionState, TransitionConfig } from "./store";
+import { TransitionState } from "./enums";
+import { store } from "./store";
 import { PageWrapper } from "./PageWrapper";
 
 export type TransitionMode = "out-in" | "in-out" | "sync";
