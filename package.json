@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "type": "module",
-  "source": "src/pagetransitions.tsx",
+  "source": "src/index.ts",
   "exports": {
     "require": "./dist/pagetransitions.cjs",
     "default": "./dist/pagetransitions.modern.js"
@@ -15,6 +15,7 @@
   "main": "./dist/pagetransitions.cjs",
   "module": "./dist/pagetransitions.module.js",
   "unpkg": "./dist/pagetransitions.umd.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "microbundle --globals zustand/vanilla=zustand/vanilla,react/jsx-runtime=jsx --jsx React.createElement --jsxFragment React.Fragment --jsxImportSource react",
     "dev": "microbundle watch"
@@ -23,12 +24,14 @@
     "@types/react": "^18.0.10",
     "@types/react-dom": "^18.0.5",
     "@types/react-transition-group": "^4.4.4",
-    "microbundle": "^0.15.0",
-    "zustand": "^3.0.0"
+    "microbundle": "^0.15.0"
   },
   "peerDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "zustand": "^3.0.0"
+    "react": ">=18.0",
+    "react-dom": ">=18.0"
+  },
+  "dependencies": {
+    "zustand": "^3.7.2",
+    "react-transition-group": "^4.4.2"
   }
 }

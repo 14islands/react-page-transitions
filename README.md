@@ -47,7 +47,7 @@ Depends on `react-transition-group` for mounting/unmounting logic.
 ## Install npm package
 
 ```bash
-yarn add react-transition-group zustand @14islands/react-page-transitions
+yarn add @14islands/react-page-transitions
 ```
 
 ## Wrap your router pages
@@ -178,12 +178,12 @@ It listens to CSS `transitionend` and CSS `animationend` events on the page cont
 
 If you want to take manual control of the transition duration, you can use the callbacks `onEntering` and `onExiting` on the `usePageTransition` hook.
 
-| Property            | type                     |  default   |
-| ------------------- | ------------------------ | ---------- |
-| mode                | out-in \| in-out \| sync | "out-in"   |
-| className           | string                   | "page"     |
+| Property            | type                     |  default  |
+| ------------------- | ------------------------ | --------- |
+| mode                | out-in \| in-out \| sync | "out-in"  |
+| className           | string                   | "page"    |
 | timeout             | number                   | undefined |
-| detectAnimationEnd  | boolean                  | true       |
+| detectAnimationEnd  | boolean                  | true      |
 | detectTransitionEnd | boolean                  | true      |
 
 <details>
