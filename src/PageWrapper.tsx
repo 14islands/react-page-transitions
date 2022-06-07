@@ -120,10 +120,8 @@ export function PageWrapper({
           className={`${className} ${className}-${pathToHypen(pathname)}`}
           ref={ref}
         >
-          export{" "}
           <PageContext.Provider value={pathname}>
             {children}
-            export{" "}
           </PageContext.Provider>
         </div>
       </CSSTransition>
