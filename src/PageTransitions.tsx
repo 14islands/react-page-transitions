@@ -1,6 +1,7 @@
-import { Fragment, ReactNode, useLayoutEffect, useMemo, useState } from "react";
+import { Fragment, ReactNode, useMemo, useState } from "react";
 import { SwitchTransition, TransitionGroup } from "react-transition-group";
 
+import { useLayoutEffect } from "./useIsomorphicLayoutEffect";
 import { TransitionState } from "./enums";
 import { store } from "./store";
 import { PageWrapper } from "./PageWrapper";
@@ -37,13 +38,6 @@ export function PageTransitions({
 
   // entering pathname
   useLayoutEffect(() => {
-    // can we use setState instead of raw access in useMemo above?
-    // store.setState({
-    //   to: pathname,
-    //   transitionStateTo: "mount",
-    //   transitionStateFrom: "mount"
-    // });
-
     // set temporary transtion data for this navigation
     store.getState().applyTransitionConfig();
 

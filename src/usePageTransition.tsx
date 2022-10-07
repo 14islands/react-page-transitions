@@ -1,6 +1,7 @@
 import { store, useStore } from "./store";
-import { useLayoutEffect, useContext } from "react";
+import { useContext } from "react";
 
+import { useLayoutEffect } from "./useIsomorphicLayoutEffect";
 import { PageContext } from "./context";
 
 interface usePageTransitionProps {
