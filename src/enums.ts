@@ -1,4 +1,5 @@
-export const enum TransitionState {
+// https://ncjamieson.com/dont-export-const-enums/
+export enum TransitionState {
   SUSPENDED = "suspended", // waiting to mount or suspended
   APPEAR = "appear",
   APPEARING = "appearing",

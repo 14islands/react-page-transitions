@@ -1,4 +1,4 @@
-export declare const enum TransitionState {
+export declare enum TransitionState {
     SUSPENDED = "suspended",
     APPEAR = "appear",
     APPEARING = "appearing",
