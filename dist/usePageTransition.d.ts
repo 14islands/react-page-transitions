@@ -1,26 +1,21 @@
 interface usePageTransitionProps {
-    onAppear?: (state?: {
-        data?: any;
-    }) => void;
-    onAppearing?: (state?: {
-        data?: any;
-        done: () => void;
-    }) => void;
-    onAppeared?: (state?: {
-        data?: any;
-    }) => void;
     onEnter?: (state?: {
+        isAppearing: boolean;
         from: string | null;
+        to: string | null;
         data?: any;
     }) => void;
     onEntering?: (state?: {
+        isAppearing: boolean;
         from: string | null;
         to: string | null;
         data?: any;
         done: () => void;
     }) => void;
     onEntered?: (state?: {
+        isAppearing: boolean;
         from: string | null;
+        to: string | null;
         data?: any;
     }) => void;
     onExit?: (state?: {
@@ -34,7 +29,7 @@ interface usePageTransitionProps {
         done: () => void;
     }) => void;
 }
-export declare function usePageTransition({ onAppear, onAppearing, onAppeared, onEnter, onEntering, onEntered, onExit, onExiting, }?: usePageTransitionProps): {
+export declare function usePageTransition({ onEnter, onEntering, onEntered, onExit, onExiting, }?: usePageTransitionProps): {
     transitionStateTo: import("./enums").TransitionState;
     transitionStateFrom: import("./enums").TransitionState;
     from: string | null;

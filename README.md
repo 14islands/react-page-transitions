@@ -121,11 +121,11 @@ sequenceDiagram
     Note over suspended, appeared: Page A
     Note right of suspended: .page-appear-suspended
     Note right of appear: .page-appear
-    appear->>appearing: onAppear()
+    appear->>appearing: onEnter({ isAppearing: true })
     Note right of appearing: .page-appear-active
-    appearing->>appeared: onAppearing({ done })
+    appearing->>appeared: onEntering({ isAppearing: true, done })
     Note right of appeared: .page-appear-done
-    appeared->>appeared: onAppeared()
+    appeared->>appeared: onEntered({ isAppearing: true })
 ```
 
 The `suspended` state only happens if the page suspended while mounting. It continues to the `appear` state automatically when suspense has resolved. To prevent this you can define your own `<Suspense>` further down the tree, which will cause the page to animate in and show your fallback instead.
@@ -269,16 +269,13 @@ function MyPage() {
 
 ### Callbacks
 
-| callbacks   | callback params    |  description                                                                                              |
-| ----------- | ------------------ | --------------------------------------------------------------------------------------------------------- |
-| onAppear    | { from, to }       | Page was mounted and is about to enter on page load                                                       |
-| onAppearing | { from, to, done } | Page is currently animating in - the `done` function has to be called to indicated animation is complete  |
-| onAppeared  | { from, to }       | Page finished animating in after page load                                                                |
-| onExit      | { from, to }       | Page is about to exit due to page navigation                                                              |
-| onExiting   | { from, to, done } | Page is currently animating out - the `done` function has to be called to indicated animation is complete |
-| onEnter     | { from, to }       | Page was mounted and is about to enter                                                                    |
-| onEntering  | { from, to, done } | Page is currently animating in - the `done` function has to be called to indicated animation is complete  |
-| onEntered   | { from, to }       | Page finished animating in after page navigation                                                          |
+| callbacks  | callback params                       |  description                                                                                              |
+| ---------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| onEnter    | { isAppearing, from, to, data }       | Page was mounted and is about to enter                                                                    |
+| onEntering | { isAppearing, from, to, done, data } | Page is currently animating in - the `done` function has to be called to indicated animation is complete  |
+| onEntered  | { isAppearing, from, to, data }       | Page finished animating in after page navigation                                                          |
+| onExit     | { from, to }                          | Page is about to exit due to page navigation                                                              |
+| onExiting  | { from, to, done }                    | Page is currently animating out - the `done` function has to be called to indicated animation is complete |
 
 <br/>
 

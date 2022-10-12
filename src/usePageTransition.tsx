@@ -4,17 +4,25 @@ import { useLayoutEffect } from "./useIsomorphicLayoutEffect";
 import { PageContext } from "./context";
 
 interface usePageTransitionProps {
-  onAppear?: (state?: { data?: any }) => void;
-  onAppearing?: (state?: { data?: any; done: () => void }) => void;
-  onAppeared?: (state?: { data?: any }) => void;
-  onEnter?: (state?: { from: string | null; data?: any }) => void;
+  onEnter?: (state?: {
+    isAppearing: boolean;
+    from: string | null;
+    to: string | null;
+    data?: any;
+  }) => void;
   onEntering?: (state?: {
+    isAppearing: boolean;
     from: string | null;
     to: string | null;
     data?: any;
     done: () => void;
   }) => void;
-  onEntered?: (state?: { from: string | null; data?: any }) => void;
+  onEntered?: (state?: {
+    isAppearing: boolean;
+    from: string | null;
+    to: string | null;
+    data?: any;
+  }) => void;
   onExit?: (state?: { to: string | null; data?: any }) => void;
   onExiting?: (state?: {
     from: string | null;
@@ -25,9 +33,6 @@ interface usePageTransitionProps {
 }
 
 export function usePageTransition({
-  onAppear,
-  onAppearing,
-  onAppeared,
   onEnter,
   onEntering,
   onEntered,
@@ -80,22 +85,44 @@ export function usePageTransition({
     function triggerEnterCallbacks() {
       if (isEnteringPage) {
         if (transitionStateTo === "appear") {
-          onAppear?.();
+          onEnter?.({
+            isAppearing: true,
+            from: store.getState().from,
+            to: store.getState().to,
+          });
         } else if (transitionStateTo === "appearing") {
-          onAppearing?.({ done: enterDone });
+          onEntering?.({
+            isAppearing: true,
+            done: enterDone,
+            from: store.getState().from,
+            to: store.getState().to,
+          });
         } else if (transitionStateTo === "appeared") {
-          onAppeared?.();
+          onEntered?.({
+            isAppearing: true,
+            from: store.getState().from,
+            to: store.getState().to,
+          });
         } else if (transitionStateTo === "enter") {
-          onEnter?.({ from: store.getState().from });
+          onEnter?.({
+            isAppearing: false,
+            from: store.getState().from,
+            to: store.getState().to,
+          });
         } else if (transitionStateTo === "entering") {
           onEntering?.({
+            isAppearing: false,
             from: store.getState().from,
             to: store.getState().to,
             done: enterDone,
             data: store.getState().data,
           });
         } else if (transitionStateTo === "entered") {
-          onEntered?.({ from: store.getState().from });
+          onEntered?.({
+            isAppearing: false,
+            from: store.getState().from,
+            to: store.getState().to,
+          });
         }
       }
     },
