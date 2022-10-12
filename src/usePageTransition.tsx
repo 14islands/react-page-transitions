@@ -1,6 +1,5 @@
+import { useContext, useEffect } from "react";
 import { store, useStore } from "./store";
-import { useContext } from "react";
-
 import { useLayoutEffect } from "./useIsomorphicLayoutEffect";
 import { PageContext } from "./context";
 
@@ -77,7 +76,7 @@ export function usePageTransition({
   }, [isExitingPage, onExiting]);
 
   // Trigger callbacks on "to" page
-  useLayoutEffect(
+  useEffect(
     function triggerEnterCallbacks() {
       if (isEnteringPage) {
         if (transitionStateTo === "appear") {
@@ -104,7 +103,7 @@ export function usePageTransition({
     [transitionStateTo] // only trigger on transition state change
   );
 
-  // Trigger exirt callbacks on "from" page
+  // Trigger exit callbacks on "from" page
   useLayoutEffect(
     function triggerExitCallbacks() {
       if (isExitingPage) {
