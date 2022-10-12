@@ -1,28 +1,28 @@
 interface usePageTransitionProps {
-    onEnter?: (state?: {
+    onEnter?: (state: {
         isAppearing: boolean;
         from: string | null;
         to: string | null;
         data?: any;
     }) => void;
-    onEntering?: (state?: {
+    onEntering?: (state: {
         isAppearing: boolean;
         from: string | null;
         to: string | null;
         data?: any;
         done: () => void;
     }) => void;
-    onEntered?: (state?: {
+    onEntered?: (state: {
         isAppearing: boolean;
         from: string | null;
         to: string | null;
         data?: any;
     }) => void;
-    onExit?: (state?: {
+    onExit?: (state: {
         to: string | null;
         data?: any;
     }) => void;
-    onExiting?: (state?: {
+    onExiting?: (state: {
         from: string | null;
         to: string | null;
         data?: any;

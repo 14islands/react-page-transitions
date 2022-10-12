@@ -4,27 +4,27 @@ import { useLayoutEffect } from "./useIsomorphicLayoutEffect";
 import { PageContext } from "./context";
 
 interface usePageTransitionProps {
-  onEnter?: (state?: {
+  onEnter?: (state: {
     isAppearing: boolean;
     from: string | null;
     to: string | null;
     data?: any;
   }) => void;
-  onEntering?: (state?: {
+  onEntering?: (state: {
     isAppearing: boolean;
     from: string | null;
     to: string | null;
     data?: any;
     done: () => void;
   }) => void;
-  onEntered?: (state?: {
+  onEntered?: (state: {
     isAppearing: boolean;
     from: string | null;
     to: string | null;
     data?: any;
   }) => void;
-  onExit?: (state?: { to: string | null; data?: any }) => void;
-  onExiting?: (state?: {
+  onExit?: (state: { to: string | null; data?: any }) => void;
+  onExiting?: (state: {
     from: string | null;
     to: string | null;
     data?: any;
